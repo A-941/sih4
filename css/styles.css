@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Sans+Gujarati:wght@400;600;700&family=Noto+Sans+Tamil:wght@400;600;700&family=Noto+Sans+Telugu:wght@400;600;700&family=Noto+Sans+Bengali:wght@400;600;700&family=Noto+Sans+Kannada:wght@400;600;700&family=Noto+Sans+Malayalam:wght@400;600;700&family=Noto+Sans+Gurmukhi:wght@400;600;700&family=Noto+Sans+Oriya:wght@400;600;700&display=swap');
+
+:root {
+  --primary-teal: #0d9488;
+  --primary-teal-dark: #0f766e;
+  --primary-teal-light: #ccfbf1;
+  --accent-cyan: #06b6d4;
+  --emergency-red: #ef4444;
+  --emergency-red-dark: #b91c1c;
+  --emergency-red-bg: #fee2e2;
+  --warning-amber: #f59e0b;
+  --success-emerald: #10b981;
+  --bg-slate: #f8fafc;
+  --card-border: #e2e8f0;
+}
+
+body {
+  font-family: 'Outfit', 'Noto Sans Devanagari', 'Noto Sans Gujarati', 'Noto Sans Tamil', 'Noto Sans Telugu', 'Noto Sans Bengali', 'Noto Sans Kannada', 'Noto Sans Malayalam', 'Noto Sans Gurmukhi', 'Noto Sans Oriya', sans-serif;
+  background-color: #f1f5f9;
+  color: #1e293b;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Glassmorphism & Elevation */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+}
+
+.kiosk-card {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+.kiosk-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -8px rgba(13, 148, 136, 0.15);
+}
+.kiosk-card:active {
+  transform: scale(0.98);
+}
+
+.kiosk-card.selected {
+  border-color: #0d9488 !important;
+  background-color: #f0fdfa !important;
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.35) !important;
+}
+
+.kiosk-card.emergency-selected {
+  border-color: #ef4444 !important;
+  background-color: #fef2f2 !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.35) !important;
+}
+
+/* High Contrast & Touch Targets for Elderly Patients */
+.touch-target-lg {
+  min-height: 54px;
+}
+
+/* Red Flag Emergency Pulsing */
+@keyframes pulse-emergency {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6); }
+  50% { box-shadow: 0 0 0 12px rgba(239, 68, 68, 0); }
+}
+.pulse-red {
+  animation: pulse-emergency 2s infinite ease-in-out;
+}
+
+/* Soundwave Voice Visualizer */
+.soundwave-bar {
+  width: 4px;
+  border-radius: 9999px;
+  background: #0d9488;
+  animation: soundwave-anim 1.2s infinite ease-in-out;
+}
+@keyframes soundwave-anim {
+  0%, 100% { height: 8px; }
+  50% { height: 32px; background: #06b6d4; }
+}
+
+/* Interactive Camera Viewfinder Frame & Laser */
+.camera-viewfinder {
+  position: relative;
+  background: #0f172a;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.6);
+}
+
+.viewfinder-corner {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-color: #06b6d4;
+  border-style: solid;
+  pointer-events: none;
+}
+.corner-tl { top: 12px; left: 12px; border-width: 3px 0 0 3px; border-top-left-radius: 6px; }
+.corner-tr { top: 12px; right: 12px; border-width: 3px 3px 0 0; border-top-right-radius: 6px; }
+.corner-bl { bottom: 12px; left: 12px; border-width: 0 0 3px 3px; border-bottom-left-radius: 6px; }
+.corner-br { bottom: 12px; right: 12px; border-width: 0 3px 3px 0; border-bottom-right-radius: 6px; }
+
+.laser-grid {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+}
+
+.scanner-laser-line {
+  position: absolute;
+  left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #06b6d4, #10b981, #06b6d4, transparent);
+  box-shadow: 0 0 14px 3px #0d9488;
+  animation: laser-sweep 2s infinite alternate ease-in-out;
+}
+@keyframes laser-sweep {
+  0% { top: 8%; opacity: 0.4; }
+  100% { top: 90%; opacity: 1; }
+}
+
+/* Thermal Receipt Ticket Styling */
+.thermal-ticket {
+  background: #fff;
+  border: 1px dashed #cbd5e1;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+.thermal-ticket::before {
+  content: '';
+  position: absolute;
+  top: -8px; left: 0; right: 0;
+  height: 8px;
+  background: radial-gradient(circle, transparent, transparent 50%, #fff 50%, #fff 100%);
+  background-size: 16px 16px;
+}
+.thermal-ticket::after {
+  content: '';
+  position: absolute;
+  bottom: -8px; left: 0; right: 0;
+  height: 8px;
+  background: radial-gradient(circle, transparent, transparent 50%, #fff 50%, #fff 100%);
+  background-size: 16px 16px;
+  transform: rotate(180deg);
+}
+
+/* Fade Transitions */
+.fade-in {
+  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Print Rules */
+@media print {
+  body * { visibility: hidden; }
+  #printableSlip, #printableSlip * { visibility: visible; }
+  #printableSlip {
+    position: absolute;
+    left: 0; top: 0; width: 100%;
+    margin: 0; padding: 20px; background: white;
+  }
+  .no-print { display: none !important; }
+}
